@@ -15,17 +15,15 @@ import {
   I_VALUE
 } from './constants'
 
-export type Token = [
-  number,
-  number,
-  string,
-  string
-]
+export type Options = { [key: string]: any }
+export type Token = [number, number, string, string]
+export type Line = Token[]
+export type Lines = Line[]
 
-const tokenizer = (txt: string): Token[][] => {
+const tokenizer = (options?: Options) => (txt: string): Lines => {
   const max = txt.length
-  const lines: Token[][] = []
-  let tokens: Token[] = []
+  const lines: Lines = []
+  let tokens: Line = []
   let li = 0
   let ci = 0
   let ti = -1
