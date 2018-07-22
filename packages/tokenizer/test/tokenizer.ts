@@ -1,6 +1,10 @@
 import test from 'tape'
 
-import { tokenizer, constants } from '../src/'
+import {
+  tokenizer,
+  T_WORD,
+  T_SPACE
+} from '../src/'
 
 const tokenize = tokenizer()
 
@@ -9,7 +13,7 @@ test('tokenizer: words', (t) => {
     tokenize('h'),
     [
       [
-        [0, 0, constants.T_WORD, 'h']
+        [0, 0, T_WORD, 'h']
       ]
     ],
     'single char'
@@ -19,7 +23,7 @@ test('tokenizer: words', (t) => {
     tokenize('hello'),
     [
       [
-        [0, 4, constants.T_WORD, 'hello']
+        [0, 4, T_WORD, 'hello']
       ]
     ],
     'single word'
@@ -33,9 +37,9 @@ test('tokenizer: space', (t) => {
     tokenize('hello world'),
     [
       [
-        [0, 4, constants.T_WORD, 'hello'],
-        [5, 5, constants.T_SPACE, ' '],
-        [6, 10, constants.T_WORD, 'world']
+        [0, 4, T_WORD, 'hello'],
+        [5, 5, T_SPACE, ' '],
+        [6, 10, T_WORD, 'world']
       ]
     ],
     'multiple words with single space'
@@ -45,9 +49,9 @@ test('tokenizer: space', (t) => {
     tokenize('hello  world'),
     [
       [
-        [0, 4, constants.T_WORD, 'hello'],
-        [5, 6, constants.T_SPACE, '  '],
-        [7, 11, constants.T_WORD, 'world']
+        [0, 4, T_WORD, 'hello'],
+        [5, 6, T_SPACE, '  '],
+        [7, 11, T_WORD, 'world']
       ]
     ],
     'multiple words with multiple spaces'
@@ -61,10 +65,10 @@ test('tokenizer: lines', (t) => {
     tokenize('hello\nworld'),
     [
       [
-        [0, 4, constants.T_WORD, 'hello']
+        [0, 4, T_WORD, 'hello']
       ],
       [
-        [0, 4, constants.T_WORD, 'world']
+        [0, 4, T_WORD, 'world']
       ]
     ],
     'multiple lines'
@@ -75,12 +79,12 @@ test('tokenizer: lines', (t) => {
     [
       [],
       [
-        [0, 4, constants.T_WORD, 'hello']
+        [0, 4, T_WORD, 'hello']
       ],
       [],
       [],
       [
-        [0, 4, constants.T_WORD, 'world']
+        [0, 4, T_WORD, 'world']
       ],
       []
     ],
