@@ -1,2 +1,4 @@
-export { default as constants } from './constants'
+import * as constants from './constants'
+
+export { constants }
 export { default as tokenizer } from './tokenizer'
