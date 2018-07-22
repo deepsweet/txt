@@ -24,24 +24,25 @@ const tokenizer = (options?: Options) => (txt: string): Lines => {
   const max = txt.length
   const lines: Lines = []
   let tokens: Line = []
+  let i = 0
   let li = 0
   let ci = 0
   let ti = -1
 
   while (true) {
-    if (ci === max) {
+    if (i === max) {
       lines[li] = tokens
       break
     }
 
-    const char = txt[ci]
+    const char = txt[i++]
 
     if (char === '\n') {
       lines[li] = tokens
       tokens = []
       lines[++li] = tokens
       ti = -1
-      ci++
+      ci = 0
       continue
     }
 
