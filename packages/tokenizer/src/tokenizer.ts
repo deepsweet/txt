@@ -53,47 +53,47 @@ const tokenizer = (options?: Options) => (txt: string): Lines => {
         continue
       }
 
-      tokens[++ti] = [ci++, ci, T_SPACE, char]
+      tokens[++ti] = [ci, ci++, T_SPACE, char]
       continue
     }
 
     if (char === '?') {
-      tokens[++ti] = [ci++, ci, T_QUESTION_MARK, char]
+      tokens[++ti] = [ci, ci++, T_QUESTION_MARK, char]
       continue
     }
 
     if (char === '!') {
-      tokens[++ti] = [ci++, ci, T_EXLAMATION_MARK, char]
+      tokens[++ti] = [ci, ci++, T_EXLAMATION_MARK, char]
       continue
     }
 
     if (char === '(') {
-      tokens[++ti] = [ci++, ci, T_LEFT_PARENTHESIS, char]
+      tokens[++ti] = [ci, ci++, T_LEFT_PARENTHESIS, char]
       continue
     }
 
     if (char === ')') {
-      tokens[++ti] = [ci++, ci, T_RIGHT_PARENTHESIS, char]
+      tokens[++ti] = [ci, ci++, T_RIGHT_PARENTHESIS, char]
       continue
     }
 
     if (char === '{') {
-      tokens[++ti] = [ci++, ci, T_LEFT_CURLY_BRACKET, char]
+      tokens[++ti] = [ci, ci++, T_LEFT_CURLY_BRACKET, char]
       continue
     }
 
     if (char === '}') {
-      tokens[++ti] = [ci++, ci, T_RIGHT_CURLY_BRACKET, char]
+      tokens[++ti] = [ci, ci++, T_RIGHT_CURLY_BRACKET, char]
       continue
     }
 
     if (char === '<') {
-      tokens[++ti] = [ci++, ci, T_LESS_THAN_SIGN, char]
+      tokens[++ti] = [ci, ci++, T_LESS_THAN_SIGN, char]
       continue
     }
 
     if (char === '>') {
-      tokens[++ti] = [ci++, ci, T_GREATER_THAN_SIGN, char]
+      tokens[++ti] = [ci, ci++, T_GREATER_THAN_SIGN, char]
       continue
     }
 
@@ -103,7 +103,7 @@ const tokenizer = (options?: Options) => (txt: string): Lines => {
       continue
     }
 
-    tokens[++ti] = [ci++, ci, T_WORD, char]
+    tokens[++ti] = [ci, ci++, T_WORD, char]
     continue
   }
 
