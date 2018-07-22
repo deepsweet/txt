@@ -27,7 +27,7 @@ const tokenizer = (options?: Options) => (txt: string): Lines => {
   let i = 0
   let li = 0
   let ci = 0
-  let ti = -1
+  let ti = 0
 
   while (true) {
     if (i === max) {
@@ -41,69 +41,69 @@ const tokenizer = (options?: Options) => (txt: string): Lines => {
       lines[li] = tokens
       tokens = []
       lines[++li] = tokens
-      ti = -1
+      ti = 0
       ci = 0
       continue
     }
 
     if (char === ' ') {
-      if (ti >= 0 && tokens[ti][I_TYPE] === T_SPACE) {
-        tokens[ti][I_TO] = ci++
-        tokens[ti][I_VALUE] += char
+      if (ti >= 1 && tokens[ti - 1][I_TYPE] === T_SPACE) {
+        tokens[ti - 1][I_TO] = ci++
+        tokens[ti - 1][I_VALUE] += char
         continue
       }
 
-      tokens[++ti] = [ci, ci++, T_SPACE, char]
+      tokens[ti++] = [ci, ci++, T_SPACE, char]
       continue
     }
 
     if (char === '?') {
-      tokens[++ti] = [ci, ci++, T_QUESTION_MARK, char]
+      tokens[ti++] = [ci, ci++, T_QUESTION_MARK, char]
       continue
     }
 
     if (char === '!') {
-      tokens[++ti] = [ci, ci++, T_EXLAMATION_MARK, char]
+      tokens[ti++] = [ci, ci++, T_EXLAMATION_MARK, char]
       continue
     }
 
     if (char === '(') {
-      tokens[++ti] = [ci, ci++, T_LEFT_PARENTHESIS, char]
+      tokens[ti++] = [ci, ci++, T_LEFT_PARENTHESIS, char]
       continue
     }
 
     if (char === ')') {
-      tokens[++ti] = [ci, ci++, T_RIGHT_PARENTHESIS, char]
+      tokens[ti++] = [ci, ci++, T_RIGHT_PARENTHESIS, char]
       continue
     }
 
     if (char === '{') {
-      tokens[++ti] = [ci, ci++, T_LEFT_CURLY_BRACKET, char]
+      tokens[ti++] = [ci, ci++, T_LEFT_CURLY_BRACKET, char]
       continue
     }
 
     if (char === '}') {
-      tokens[++ti] = [ci, ci++, T_RIGHT_CURLY_BRACKET, char]
+      tokens[ti++] = [ci, ci++, T_RIGHT_CURLY_BRACKET, char]
       continue
     }
 
     if (char === '<') {
-      tokens[++ti] = [ci, ci++, T_LESS_THAN_SIGN, char]
+      tokens[ti++] = [ci, ci++, T_LESS_THAN_SIGN, char]
       continue
     }
 
     if (char === '>') {
-      tokens[++ti] = [ci, ci++, T_GREATER_THAN_SIGN, char]
+      tokens[ti++] = [ci, ci++, T_GREATER_THAN_SIGN, char]
       continue
     }
 
-    if (ti >= 0 && tokens[ti][I_TYPE] === T_WORD) {
-      tokens[ti][I_TO] = ci++
-      tokens[ti][I_VALUE] += char
+    if (ti >= 1 && tokens[ti - 1][I_TYPE] === T_WORD) {
+      tokens[ti - 1][I_TO] = ci++
+      tokens[ti - 1][I_VALUE] += char
       continue
     }
 
-    tokens[++ti] = [ci, ci++, T_WORD, char]
+    tokens[ti++] = [ci, ci++, T_WORD, char]
     continue
   }
 
