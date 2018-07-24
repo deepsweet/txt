@@ -7,7 +7,8 @@ import {
   T_LEFT_PARENTHESIS,
   T_RIGHT_PARENTHESIS,
   T_DOUBLE_QUOTE,
-  T_SINGLE_QUOTE
+  T_SINGLE_QUOTE,
+  T_BACKTICK
 } from '../src/'
 
 test('tokenizer', (t) => {
@@ -226,6 +227,33 @@ test('tokenizer', (t) => {
       ]
     ],
     'single quotes'
+  )
+
+  t.deepEqual(
+    tokenize('`foo`'),
+    [
+      [
+        {
+          type: T_BACKTICK,
+          from: 0,
+          to: 0,
+          value: '`'
+        },
+        {
+          type: T_WORD,
+          from: 1,
+          to: 3,
+          value: 'foo'
+        },
+        {
+          type: T_BACKTICK,
+          from: 4,
+          to: 4,
+          value: '`'
+        }
+      ]
+    ],
+    'backticks'
   )
 
   t.end()
