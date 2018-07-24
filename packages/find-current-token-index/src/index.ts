@@ -1,4 +1,5 @@
 // TODO: transpile back on build
+// eslint-disable-next-line node/no-missing-import
 import { TLine } from '@txt/tokenizer/src/'
 import binarySearch from 'bsc'
 
