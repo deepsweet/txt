@@ -32,21 +32,15 @@ export const lexerPairs = (lines: TLines): TPairs => {
       const token = tokens[ti]
 
       if (token.type === T_LEFT_PARENTHESIS) {
-        pairs[T_PARENTHESES].push({
-          x: ti,
-          y: li
-        })
+        pairs[T_PARENTHESES].push({ x: ti, y: li })
         continue
       }
 
       if (token.type === T_RIGHT_PARENTHESIS && pairs[T_PARENTHESES].length > 0) {
         result.push({
+          type: T_PARENTHESES,
           open: pairs[T_PARENTHESES].pop(),
-          close: {
-            x: ti,
-            y: li
-          },
-          type: T_PARENTHESES
+          close: { x: ti, y: li }
         })
         continue
       }

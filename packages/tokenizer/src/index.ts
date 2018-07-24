@@ -45,9 +45,9 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
 
     if (char === ' ') {
       tokens.push({
+        type: T_SPACE,
         from: ci,
         to: ci,
-        type: T_SPACE,
         value: char
       })
       continue
@@ -55,9 +55,9 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
 
     if (char === '(') {
       tokens.push({
+        type: T_LEFT_PARENTHESIS,
         from: ci,
         to: ci,
-        type: T_LEFT_PARENTHESIS,
         value: char
       })
       continue
@@ -65,9 +65,9 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
 
     if (char === ')') {
       tokens.push({
+        type: T_RIGHT_PARENTHESIS,
         from: ci,
         to: ci,
-        type: T_RIGHT_PARENTHESIS,
         value: char
       })
       continue
@@ -84,9 +84,9 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
     }
 
     tokens.push({
+      type: T_WORD,
       from: ci,
       to: ci,
-      type: T_WORD,
       value: char
     })
   }

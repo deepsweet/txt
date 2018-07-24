@@ -13,7 +13,12 @@ test('tokenizer', (t) => {
     tokenize('h'),
     [
       [
-        {from: 0, to: 0, type: T_WORD, value: 'h'}
+        {
+          type: T_WORD,
+          from: 0,
+          to: 0,
+          value: 'h'
+        }
       ]
     ],
     'single char'
@@ -23,7 +28,12 @@ test('tokenizer', (t) => {
     tokenize('hello'),
     [
       [
-        {from: 0, to: 4, type: T_WORD, value: 'hello'}
+        {
+          type: T_WORD,
+          from: 0,
+          to: 4,
+          value: 'hello'
+        }
       ]
     ],
     'single word'
@@ -33,9 +43,24 @@ test('tokenizer', (t) => {
     tokenize('hello world'),
     [
       [
-        {from: 0, to: 4, type: T_WORD, value: 'hello'},
-        {from: 5, to: 5, type: T_SPACE, value: ' '},
-        {from: 6, to: 10, type: T_WORD, value: 'world'}
+        {
+          type: T_WORD,
+          from: 0,
+          to: 4,
+          value: 'hello'
+        },
+        {
+          type: T_SPACE,
+          from: 5,
+          to: 5,
+          value: ' '
+        },
+        {
+          type: T_WORD,
+          from: 6,
+          to: 10,
+          value: 'world'
+        }
       ]
     ],
     'multiple words with single space'
@@ -45,9 +70,24 @@ test('tokenizer', (t) => {
     tokenize('hello  world'),
     [
       [
-        {from: 0, to: 4, type: T_WORD, value: 'hello'},
-        {from: 5, to: 6, type: T_SPACE, value: '  '},
-        {from: 7, to: 11, type: T_WORD, value: 'world'}
+        {
+          type: T_WORD,
+          from: 0,
+          to: 4,
+          value: 'hello'
+        },
+        {
+          type: T_SPACE,
+          from: 5,
+          to: 6,
+          value: '  '
+        },
+        {
+          type: T_WORD,
+          from: 7,
+          to: 11,
+          value: 'world'
+        }
       ]
     ],
     'multiple words with multiple spaces'
@@ -57,10 +97,20 @@ test('tokenizer', (t) => {
     tokenize('hello\nworld'),
     [
       [
-        {from: 0, to: 4, type: T_WORD, value: 'hello'}
+        {
+          type: T_WORD,
+          from: 0,
+          to: 4,
+          value: 'hello'
+        }
       ],
       [
-        {from: 0, to: 4, type: T_WORD, value: 'world'}
+        {
+          type: T_WORD,
+          from: 0,
+          to: 4,
+          value: 'world'
+        }
       ]
     ],
     'multiple lines'
@@ -71,12 +121,22 @@ test('tokenizer', (t) => {
     [
       [],
       [
-        {from: 0, to: 4, type: T_WORD, value: 'hello'}
+        {
+          type: T_WORD,
+          from: 0,
+          to: 4,
+          value: 'hello'
+        }
       ],
       [],
       [],
       [
-        {from: 0, to: 4, type: T_WORD, value: 'world'}
+        {
+          type: T_WORD,
+          from: 0,
+          to: 4,
+          value: 'world'
+        }
       ],
       []
     ],
