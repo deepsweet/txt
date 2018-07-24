@@ -4,7 +4,8 @@ import { tokenizer } from '@txt/tokenizer/src/'
 import {
   lexerPairs,
   T_PARENTHESES,
-  T_DOUBLE_QUOTES
+  T_DOUBLE_QUOTES,
+  T_SINGLE_QUOTES
 } from '../src/'
 
 test('lexer-pairs', (t) => {
@@ -73,6 +74,20 @@ test('lexer-pairs', (t) => {
 
   t.deepEqual(
     lexerPairs(
+      tokenize('"f\'o\'o"')
+    ),
+    [
+      {
+        type: T_DOUBLE_QUOTES,
+        open: { x: 0, y: 0 },
+        close: { x: 6, y: 0 }
+      }
+    ],
+    'single quotes inside of double quotes'
+  )
+
+  t.deepEqual(
+    lexerPairs(
       tokenize('"fo(o)"')
     ),
     [
@@ -83,6 +98,48 @@ test('lexer-pairs', (t) => {
       }
     ],
     'parentheses inside of double quotes'
+  )
+
+  t.deepEqual(
+    lexerPairs(
+      tokenize('\'foo\'')
+    ),
+    [
+      {
+        type: T_SINGLE_QUOTES,
+        open: { x: 0, y: 0 },
+        close: { x: 2, y: 0 }
+      }
+    ],
+    'single quotes'
+  )
+
+  t.deepEqual(
+    lexerPairs(
+      tokenize('\'f"o"o\'')
+    ),
+    [
+      {
+        type: T_SINGLE_QUOTES,
+        open: { x: 0, y: 0 },
+        close: { x: 6, y: 0 }
+      }
+    ],
+    'double quotes inside of single quotes'
+  )
+
+  t.deepEqual(
+    lexerPairs(
+      tokenize('\'fo(o)\'')
+    ),
+    [
+      {
+        type: T_SINGLE_QUOTES,
+        open: { x: 0, y: 0 },
+        close: { x: 5, y: 0 }
+      }
+    ],
+    'parentheses inside of single quotes'
   )
 
   t.end()

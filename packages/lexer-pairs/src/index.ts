@@ -2,13 +2,13 @@ import {
   TLines,
   T_LEFT_PARENTHESIS,
   T_RIGHT_PARENTHESIS,
-  // T_SINGLE_QUOTE,
+  T_SINGLE_QUOTE,
   T_DOUBLE_QUOTE
   // T_BACKTICK
 } from '@txt/tokenizer/src/'
 
 export const T_PARENTHESES = 'PARENTHESES'
-// export const T_SINGLE_QUOTES = 'SINGLE_QUOTES'
+export const T_SINGLE_QUOTES = 'SINGLE_QUOTES'
 export const T_DOUBLE_QUOTES = 'DOUBLE_QUOTES'
 // export const T_BACKTICKS = 'BACKTICKS'
 
@@ -28,7 +28,8 @@ export type TPairs = TPair[]
 export const lexerPairs = (lines: TLines): TPairs => {
   const pairs = {
     [T_PARENTHESES]: [],
-    [T_DOUBLE_QUOTES]: []
+    [T_DOUBLE_QUOTES]: [],
+    [T_SINGLE_QUOTES]: []
   }
   const result = []
 
@@ -40,7 +41,8 @@ export const lexerPairs = (lines: TLines): TPairs => {
 
       if (
         token.type === T_LEFT_PARENTHESIS &&
-        pairs[T_DOUBLE_QUOTES].length === 0
+        pairs[T_DOUBLE_QUOTES].length === 0 &&
+        pairs[T_SINGLE_QUOTES].length === 0
       ) {
         pairs[T_PARENTHESES].push({ x: ti, y: li })
         continue
@@ -49,7 +51,8 @@ export const lexerPairs = (lines: TLines): TPairs => {
       if (
         token.type === T_RIGHT_PARENTHESIS &&
         pairs[T_PARENTHESES].length > 0 &&
-        pairs[T_DOUBLE_QUOTES].length === 0
+        pairs[T_DOUBLE_QUOTES].length === 0 &&
+        pairs[T_SINGLE_QUOTES].length === 0
       ) {
         result.push({
           type: T_PARENTHESES,
@@ -59,7 +62,11 @@ export const lexerPairs = (lines: TLines): TPairs => {
         continue
       }
 
-      if (token.type === T_DOUBLE_QUOTE && pairs[T_DOUBLE_QUOTES].length > 0) {
+      if (
+        token.type === T_DOUBLE_QUOTE &&
+        pairs[T_DOUBLE_QUOTES].length > 0 &&
+        pairs[T_SINGLE_QUOTES].length === 0
+      ) {
         result.push({
           type: T_DOUBLE_QUOTES,
           open: pairs[T_DOUBLE_QUOTES].pop(),
@@ -68,8 +75,32 @@ export const lexerPairs = (lines: TLines): TPairs => {
         continue
       }
 
-      if (token.type === T_DOUBLE_QUOTE) {
+      if (
+        token.type === T_DOUBLE_QUOTE &&
+        pairs[T_SINGLE_QUOTES].length === 0
+      ) {
         pairs[T_DOUBLE_QUOTES].push({ x: ti, y: li })
+        continue
+      }
+
+      if (
+        token.type === T_SINGLE_QUOTE &&
+        pairs[T_SINGLE_QUOTES].length > 0 &&
+        pairs[T_DOUBLE_QUOTES].length === 0
+      ) {
+        result.push({
+          type: T_SINGLE_QUOTES,
+          open: pairs[T_SINGLE_QUOTES].pop(),
+          close: { x: ti, y: li }
+        })
+        continue
+      }
+
+      if (
+        token.type === T_SINGLE_QUOTE &&
+        pairs[T_DOUBLE_QUOTES].length === 0
+      ) {
+        pairs[T_SINGLE_QUOTES].push({ x: ti, y: li })
         continue
       }
     }
