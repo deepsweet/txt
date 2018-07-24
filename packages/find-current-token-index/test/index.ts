@@ -1,5 +1,5 @@
 import test from 'tape'
-import { tokenizer } from '@txt/tokenizer'
+import { tokenizer } from '@txt/tokenizer/src/'
 
 import findCurrentTokenIndex from '../src/'
 
