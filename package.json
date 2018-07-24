@@ -1,5 +1,8 @@
 {
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "@deepsweet/eslint-config-node-ts": "^0.1.0",
     "@deepsweet/start-preset-node-ts-monorepo": "^0.0.2",
@@ -12,6 +15,6 @@
     "extends": "@deepsweet/eslint-config-node-ts"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   }
 }
