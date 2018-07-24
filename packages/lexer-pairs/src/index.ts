@@ -1,16 +1,16 @@
 import {
   TLines,
-  T_LEFT_PARENTHESIS,
-  T_RIGHT_PARENTHESIS,
-  T_SINGLE_QUOTE,
-  T_DOUBLE_QUOTE,
-  T_BACKTICK
+  T_TOKEN_LEFT_PARENTHESIS,
+  T_TOKEN_RIGHT_PARENTHESIS,
+  T_TOKEN_SINGLE_QUOTE,
+  T_TOKEN_DOUBLE_QUOTE,
+  T_TOKEN_BACKTICK
 } from '@txt/tokenizer/src/'
 
-export const T_PARENTHESES = 'PARENTHESES'
-export const T_SINGLE_QUOTES = 'SINGLE_QUOTES'
-export const T_DOUBLE_QUOTES = 'DOUBLE_QUOTES'
-export const T_BACKTICKS = 'BACKTICKS'
+export const T_PAIR_PARENTHESES = 'PARENTHESES'
+export const T_PAIR_SINGLE_QUOTES = 'SINGLE_QUOTES'
+export const T_PAIR_DOUBLE_QUOTES = 'DOUBLE_QUOTES'
+export const T_PAIR_BACKTICKS = 'BACKTICKS'
 
 export type TPair = {
   from: {
@@ -27,10 +27,10 @@ export type TPairs = TPair[]
 
 export const lexerPairs = (lines: TLines): TPairs => {
   const pairs = {
-    [T_PARENTHESES]: [],
-    [T_DOUBLE_QUOTES]: [],
-    [T_SINGLE_QUOTES]: [],
-    [T_BACKTICKS]: []
+    [T_PAIR_PARENTHESES]: [],
+    [T_PAIR_DOUBLE_QUOTES]: [],
+    [T_PAIR_SINGLE_QUOTES]: [],
+    [T_PAIR_BACKTICKS]: []
   }
   const result = []
 
@@ -41,96 +41,96 @@ export const lexerPairs = (lines: TLines): TPairs => {
       const token = tokens[ti]
 
       if (
-        token.type === T_LEFT_PARENTHESIS &&
-        pairs[T_DOUBLE_QUOTES].length === 0 &&
-        pairs[T_SINGLE_QUOTES].length === 0 &&
-        pairs[T_BACKTICKS].length === 0
+        token.type === T_TOKEN_LEFT_PARENTHESIS &&
+        pairs[T_PAIR_DOUBLE_QUOTES].length === 0 &&
+        pairs[T_PAIR_SINGLE_QUOTES].length === 0 &&
+        pairs[T_PAIR_BACKTICKS].length === 0
       ) {
-        pairs[T_PARENTHESES].push({ x: ti, y: li })
+        pairs[T_PAIR_PARENTHESES].push({ x: ti, y: li })
         continue
       }
 
       if (
-        token.type === T_RIGHT_PARENTHESIS &&
-        pairs[T_PARENTHESES].length > 0 &&
-        pairs[T_DOUBLE_QUOTES].length === 0 &&
-        pairs[T_SINGLE_QUOTES].length === 0 &&
-        pairs[T_BACKTICKS].length === 0
+        token.type === T_TOKEN_RIGHT_PARENTHESIS &&
+        pairs[T_PAIR_PARENTHESES].length > 0 &&
+        pairs[T_PAIR_DOUBLE_QUOTES].length === 0 &&
+        pairs[T_PAIR_SINGLE_QUOTES].length === 0 &&
+        pairs[T_PAIR_BACKTICKS].length === 0
       ) {
         result.push({
-          type: T_PARENTHESES,
-          open: pairs[T_PARENTHESES].pop(),
+          type: T_PAIR_PARENTHESES,
+          open: pairs[T_PAIR_PARENTHESES].pop(),
           close: { x: ti, y: li }
         })
         continue
       }
 
       if (
-        token.type === T_DOUBLE_QUOTE &&
-        pairs[T_DOUBLE_QUOTES].length > 0 &&
-        pairs[T_SINGLE_QUOTES].length === 0 &&
-        pairs[T_BACKTICKS].length === 0
+        token.type === T_TOKEN_DOUBLE_QUOTE &&
+        pairs[T_PAIR_DOUBLE_QUOTES].length > 0 &&
+        pairs[T_PAIR_SINGLE_QUOTES].length === 0 &&
+        pairs[T_PAIR_BACKTICKS].length === 0
       ) {
         result.push({
-          type: T_DOUBLE_QUOTES,
-          open: pairs[T_DOUBLE_QUOTES].pop(),
+          type: T_PAIR_DOUBLE_QUOTES,
+          open: pairs[T_PAIR_DOUBLE_QUOTES].pop(),
           close: { x: ti, y: li }
         })
         continue
       }
 
       if (
-        token.type === T_DOUBLE_QUOTE &&
-        pairs[T_SINGLE_QUOTES].length === 0 &&
-        pairs[T_BACKTICKS].length === 0
+        token.type === T_TOKEN_DOUBLE_QUOTE &&
+        pairs[T_PAIR_SINGLE_QUOTES].length === 0 &&
+        pairs[T_PAIR_BACKTICKS].length === 0
       ) {
-        pairs[T_DOUBLE_QUOTES].push({ x: ti, y: li })
+        pairs[T_PAIR_DOUBLE_QUOTES].push({ x: ti, y: li })
         continue
       }
 
       if (
-        token.type === T_SINGLE_QUOTE &&
-        pairs[T_SINGLE_QUOTES].length > 0 &&
-        pairs[T_DOUBLE_QUOTES].length === 0 &&
-        pairs[T_BACKTICKS].length === 0
+        token.type === T_TOKEN_SINGLE_QUOTE &&
+        pairs[T_PAIR_SINGLE_QUOTES].length > 0 &&
+        pairs[T_PAIR_DOUBLE_QUOTES].length === 0 &&
+        pairs[T_PAIR_BACKTICKS].length === 0
       ) {
         result.push({
-          type: T_SINGLE_QUOTES,
-          open: pairs[T_SINGLE_QUOTES].pop(),
+          type: T_PAIR_SINGLE_QUOTES,
+          open: pairs[T_PAIR_SINGLE_QUOTES].pop(),
           close: { x: ti, y: li }
         })
         continue
       }
 
       if (
-        token.type === T_SINGLE_QUOTE &&
-        pairs[T_DOUBLE_QUOTES].length === 0 &&
-        pairs[T_BACKTICKS].length === 0
+        token.type === T_TOKEN_SINGLE_QUOTE &&
+        pairs[T_PAIR_DOUBLE_QUOTES].length === 0 &&
+        pairs[T_PAIR_BACKTICKS].length === 0
       ) {
-        pairs[T_SINGLE_QUOTES].push({ x: ti, y: li })
+        pairs[T_PAIR_SINGLE_QUOTES].push({ x: ti, y: li })
         continue
       }
 
       if (
-        token.type === T_BACKTICK &&
-        pairs[T_BACKTICKS].length > 0 &&
-        pairs[T_DOUBLE_QUOTES].length === 0 &&
-        pairs[T_SINGLE_QUOTES].length === 0
+        token.type === T_TOKEN_BACKTICK &&
+        pairs[T_PAIR_BACKTICKS].length > 0 &&
+        pairs[T_PAIR_DOUBLE_QUOTES].length === 0 &&
+        pairs[T_PAIR_SINGLE_QUOTES].length === 0
       ) {
         result.push({
-          type: T_BACKTICKS,
-          open: pairs[T_BACKTICKS].pop(),
+          type: T_PAIR_BACKTICKS,
+          open: pairs[T_PAIR_BACKTICKS].pop(),
           close: { x: ti, y: li }
         })
         continue
       }
 
       if (
-        token.type === T_BACKTICK &&
-        pairs[T_DOUBLE_QUOTES].length === 0 &&
-        pairs[T_SINGLE_QUOTES].length === 0
+        token.type === T_TOKEN_BACKTICK &&
+        pairs[T_PAIR_DOUBLE_QUOTES].length === 0 &&
+        pairs[T_PAIR_SINGLE_QUOTES].length === 0
       ) {
-        pairs[T_BACKTICKS].push({ x: ti, y: li })
+        pairs[T_PAIR_BACKTICKS].push({ x: ti, y: li })
         continue
       }
     }

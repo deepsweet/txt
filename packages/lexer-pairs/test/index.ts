@@ -3,10 +3,10 @@ import { tokenizer } from '@txt/tokenizer/src/'
 
 import {
   lexerPairs,
-  T_PARENTHESES,
-  T_DOUBLE_QUOTES,
-  T_SINGLE_QUOTES,
-  T_BACKTICKS
+  T_PAIR_PARENTHESES,
+  T_PAIR_DOUBLE_QUOTES,
+  T_PAIR_SINGLE_QUOTES,
+  T_PAIR_BACKTICKS
 } from '../src/'
 
 test('lexer-pairs', (t) => {
@@ -18,7 +18,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_PARENTHESES,
+        type: T_PAIR_PARENTHESES,
         open: { x: 0, y: 0 },
         close: { x: 2, y: 0 }
       }
@@ -32,7 +32,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_PARENTHESES,
+        type: T_PAIR_PARENTHESES,
         open: { x: 0, y: 0 },
         close: { x: 2, y: 0 }
       }
@@ -46,12 +46,12 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_PARENTHESES,
+        type: T_PAIR_PARENTHESES,
         open: { x: 3, y: 0 },
         close: { x: 5, y: 0 }
       },
       {
-        type: T_PARENTHESES,
+        type: T_PAIR_PARENTHESES,
         open: { x: 0, y: 0 },
         close: { x: 8, y: 0 }
       }
@@ -65,7 +65,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_DOUBLE_QUOTES,
+        type: T_PAIR_DOUBLE_QUOTES,
         open: { x: 0, y: 0 },
         close: { x: 2, y: 0 }
       }
@@ -79,7 +79,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_DOUBLE_QUOTES,
+        type: T_PAIR_DOUBLE_QUOTES,
         open: { x: 0, y: 0 },
         close: { x: 6, y: 0 }
       }
@@ -93,7 +93,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_DOUBLE_QUOTES,
+        type: T_PAIR_DOUBLE_QUOTES,
         open: { x: 0, y: 0 },
         close: { x: 6, y: 0 }
       }
@@ -107,7 +107,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_DOUBLE_QUOTES,
+        type: T_PAIR_DOUBLE_QUOTES,
         open: { x: 0, y: 0 },
         close: { x: 5, y: 0 }
       }
@@ -121,7 +121,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_SINGLE_QUOTES,
+        type: T_PAIR_SINGLE_QUOTES,
         open: { x: 0, y: 0 },
         close: { x: 2, y: 0 }
       }
@@ -135,7 +135,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_SINGLE_QUOTES,
+        type: T_PAIR_SINGLE_QUOTES,
         open: { x: 0, y: 0 },
         close: { x: 6, y: 0 }
       }
@@ -149,7 +149,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_SINGLE_QUOTES,
+        type: T_PAIR_SINGLE_QUOTES,
         open: { x: 0, y: 0 },
         close: { x: 6, y: 0 }
       }
@@ -163,7 +163,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_SINGLE_QUOTES,
+        type: T_PAIR_SINGLE_QUOTES,
         open: { x: 0, y: 0 },
         close: { x: 5, y: 0 }
       }
@@ -177,7 +177,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_BACKTICKS,
+        type: T_PAIR_BACKTICKS,
         open: { x: 0, y: 0 },
         close: { x: 2, y: 0 }
       }
@@ -191,7 +191,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_BACKTICKS,
+        type: T_PAIR_BACKTICKS,
         open: { x: 0, y: 0 },
         close: { x: 6, y: 0 }
       }
@@ -205,7 +205,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_BACKTICKS,
+        type: T_PAIR_BACKTICKS,
         open: { x: 0, y: 0 },
         close: { x: 6, y: 0 }
       }
@@ -219,7 +219,7 @@ test('lexer-pairs', (t) => {
     ),
     [
       {
-        type: T_BACKTICKS,
+        type: T_PAIR_BACKTICKS,
         open: { x: 0, y: 0 },
         close: { x: 5, y: 0 }
       }

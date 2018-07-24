@@ -2,13 +2,13 @@ import test from 'tape'
 
 import {
   tokenizer,
-  T_WORD,
-  T_SPACE,
-  T_LEFT_PARENTHESIS,
-  T_RIGHT_PARENTHESIS,
-  T_DOUBLE_QUOTE,
-  T_SINGLE_QUOTE,
-  T_BACKTICK
+  T_TOKEN_WORD,
+  T_TOKEN_SPACE,
+  T_TOKEN_LEFT_PARENTHESIS,
+  T_TOKEN_RIGHT_PARENTHESIS,
+  T_TOKEN_DOUBLE_QUOTE,
+  T_TOKEN_SINGLE_QUOTE,
+  T_TOKEN_BACKTICK
 } from '../src/'
 
 test('tokenizer', (t) => {
@@ -19,7 +19,7 @@ test('tokenizer', (t) => {
     [
       [
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 0,
           to: 0,
           value: 'h'
@@ -34,7 +34,7 @@ test('tokenizer', (t) => {
     [
       [
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 0,
           to: 4,
           value: 'hello'
@@ -49,19 +49,19 @@ test('tokenizer', (t) => {
     [
       [
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 0,
           to: 4,
           value: 'hello'
         },
         {
-          type: T_SPACE,
+          type: T_TOKEN_SPACE,
           from: 5,
           to: 5,
           value: ' '
         },
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 6,
           to: 10,
           value: 'world'
@@ -76,19 +76,19 @@ test('tokenizer', (t) => {
     [
       [
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 0,
           to: 4,
           value: 'hello'
         },
         {
-          type: T_SPACE,
+          type: T_TOKEN_SPACE,
           from: 5,
           to: 6,
           value: '  '
         },
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 7,
           to: 11,
           value: 'world'
@@ -103,7 +103,7 @@ test('tokenizer', (t) => {
     [
       [
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 0,
           to: 4,
           value: 'hello'
@@ -111,7 +111,7 @@ test('tokenizer', (t) => {
       ],
       [
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 0,
           to: 4,
           value: 'world'
@@ -127,7 +127,7 @@ test('tokenizer', (t) => {
       [],
       [
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 0,
           to: 4,
           value: 'hello'
@@ -137,7 +137,7 @@ test('tokenizer', (t) => {
       [],
       [
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 0,
           to: 4,
           value: 'world'
@@ -153,19 +153,19 @@ test('tokenizer', (t) => {
     [
       [
         {
-          type: T_LEFT_PARENTHESIS,
+          type: T_TOKEN_LEFT_PARENTHESIS,
           from: 0,
           to: 0,
           value: '('
         },
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 1,
           to: 3,
           value: 'foo'
         },
         {
-          type: T_RIGHT_PARENTHESIS,
+          type: T_TOKEN_RIGHT_PARENTHESIS,
           from: 4,
           to: 4,
           value: ')'
@@ -180,19 +180,19 @@ test('tokenizer', (t) => {
     [
       [
         {
-          type: T_DOUBLE_QUOTE,
+          type: T_TOKEN_DOUBLE_QUOTE,
           from: 0,
           to: 0,
           value: '"'
         },
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 1,
           to: 3,
           value: 'foo'
         },
         {
-          type: T_DOUBLE_QUOTE,
+          type: T_TOKEN_DOUBLE_QUOTE,
           from: 4,
           to: 4,
           value: '"'
@@ -207,19 +207,19 @@ test('tokenizer', (t) => {
     [
       [
         {
-          type: T_SINGLE_QUOTE,
+          type: T_TOKEN_SINGLE_QUOTE,
           from: 0,
           to: 0,
           value: '\''
         },
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 1,
           to: 3,
           value: 'foo'
         },
         {
-          type: T_SINGLE_QUOTE,
+          type: T_TOKEN_SINGLE_QUOTE,
           from: 4,
           to: 4,
           value: '\''
@@ -234,19 +234,19 @@ test('tokenizer', (t) => {
     [
       [
         {
-          type: T_BACKTICK,
+          type: T_TOKEN_BACKTICK,
           from: 0,
           to: 0,
           value: '`'
         },
         {
-          type: T_WORD,
+          type: T_TOKEN_WORD,
           from: 1,
           to: 3,
           value: 'foo'
         },
         {
-          type: T_BACKTICK,
+          type: T_TOKEN_BACKTICK,
           from: 4,
           to: 4,
           value: '`'

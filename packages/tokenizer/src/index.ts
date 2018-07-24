@@ -1,12 +1,12 @@
-export const T_WORD = 'WORD'
-export const T_SPACE = 'SPACE'
+export const T_TOKEN_WORD = 'WORD'
+export const T_TOKEN_SPACE = 'SPACE'
 // export const T_QUESTION_MARK = 'QUESTION_MARK'
 // export const T_EXLAMATION_MARK = 'EXLAMATION_MARK'
-export const T_LEFT_PARENTHESIS = 'LEFT_PARENTHESIS'
-export const T_RIGHT_PARENTHESIS = 'RIGHT_PARENTHESIS'
-export const T_SINGLE_QUOTE = 'SINGLE_QUOTE'
-export const T_DOUBLE_QUOTE = 'DOUBLE_QUOTE'
-export const T_BACKTICK = 'BACKTICK'
+export const T_TOKEN_LEFT_PARENTHESIS = 'LEFT_PARENTHESIS'
+export const T_TOKEN_RIGHT_PARENTHESIS = 'RIGHT_PARENTHESIS'
+export const T_TOKEN_SINGLE_QUOTE = 'SINGLE_QUOTE'
+export const T_TOKEN_DOUBLE_QUOTE = 'DOUBLE_QUOTE'
+export const T_TOKEN_BACKTICK = 'BACKTICK'
 // export const T_LEFT_CURLY_BRACKET = 'LEFT_CURLY_BRACKET'
 // export const T_RIGHT_CURLY_BRACKET = 'RIGHT_CURLY_BRACKET'
 // export const T_LESS_THAN_SIGN = 'LESS_THAN_SIGN'
@@ -39,7 +39,7 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
     if (char === ' ' && tokens.length > 0) {
       const token = tokens[tokens.length - 1]
 
-      if (token.type === T_SPACE) {
+      if (token.type === T_TOKEN_SPACE) {
         token.to = ci
         token.value += char
         continue
@@ -48,7 +48,7 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
 
     if (char === ' ') {
       tokens.push({
-        type: T_SPACE,
+        type: T_TOKEN_SPACE,
         from: ci,
         to: ci,
         value: char
@@ -58,7 +58,7 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
 
     if (char === '"') {
       tokens.push({
-        type: T_DOUBLE_QUOTE,
+        type: T_TOKEN_DOUBLE_QUOTE,
         from: ci,
         to: ci,
         value: char
@@ -68,7 +68,7 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
 
     if (char === '\'') {
       tokens.push({
-        type: T_SINGLE_QUOTE,
+        type: T_TOKEN_SINGLE_QUOTE,
         from: ci,
         to: ci,
         value: char
@@ -78,7 +78,7 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
 
     if (char === '`') {
       tokens.push({
-        type: T_BACKTICK,
+        type: T_TOKEN_BACKTICK,
         from: ci,
         to: ci,
         value: char
@@ -88,7 +88,7 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
 
     if (char === '(') {
       tokens.push({
-        type: T_LEFT_PARENTHESIS,
+        type: T_TOKEN_LEFT_PARENTHESIS,
         from: ci,
         to: ci,
         value: char
@@ -98,7 +98,7 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
 
     if (char === ')') {
       tokens.push({
-        type: T_RIGHT_PARENTHESIS,
+        type: T_TOKEN_RIGHT_PARENTHESIS,
         from: ci,
         to: ci,
         value: char
@@ -109,7 +109,7 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
     if (tokens.length > 0) {
       const token = tokens[tokens.length - 1]
 
-      if (token.type === T_WORD) {
+      if (token.type === T_TOKEN_WORD) {
         token.to = ci
         token.value += char
         continue
@@ -117,7 +117,7 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
     }
 
     tokens.push({
-      type: T_WORD,
+      type: T_TOKEN_WORD,
       from: ci,
       to: ci,
       value: char
