@@ -1,0 +1,21 @@
+{
+  "name": "@txt/tokenizer",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": "",
+  "repository": "deepsweet/txt",
+  "homepage": "https://github.com/deepsweet/txt/tree/master/packages/cli",
+  "author": "Kir Belevich <kir@belevi.ch> (https://twitter.com/deepsweet)",
+  "license": "MIT",
+  "files": [
+    "build/"
+  ],
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8"
+  }
+}

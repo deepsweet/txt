@@ -6,14 +6,14 @@ import {
   T_SPACE
 } from '../src/'
 
-const tokenize = tokenizer()
+test('tokenizer', (t) => {
+  const tokenize = tokenizer()
 
-test('tokenizer: words', (t) => {
   t.deepEqual(
     tokenize('h'),
     [
       [
-        [0, 0, T_WORD, 'h']
+        {from: 0, to: 0, type: T_WORD, value: 'h'}
       ]
     ],
     'single char'
@@ -23,23 +23,19 @@ test('tokenizer: words', (t) => {
     tokenize('hello'),
     [
       [
-        [0, 4, T_WORD, 'hello']
+        {from: 0, to: 4, type: T_WORD, value: 'hello'}
       ]
     ],
     'single word'
   )
 
-  t.end()
-})
-
-test('tokenizer: space', (t) => {
   t.deepEqual(
     tokenize('hello world'),
     [
       [
-        [0, 4, T_WORD, 'hello'],
-        [5, 5, T_SPACE, ' '],
-        [6, 10, T_WORD, 'world']
+        {from: 0, to: 4, type: T_WORD, value: 'hello'},
+        {from: 5, to: 5, type: T_SPACE, value: ' '},
+        {from: 6, to: 10, type: T_WORD, value: 'world'}
       ]
     ],
     'multiple words with single space'
@@ -49,26 +45,22 @@ test('tokenizer: space', (t) => {
     tokenize('hello  world'),
     [
       [
-        [0, 4, T_WORD, 'hello'],
-        [5, 6, T_SPACE, '  '],
-        [7, 11, T_WORD, 'world']
+        {from: 0, to: 4, type: T_WORD, value: 'hello'},
+        {from: 5, to: 6, type: T_SPACE, value: '  '},
+        {from: 7, to: 11, type: T_WORD, value: 'world'}
       ]
     ],
     'multiple words with multiple spaces'
   )
 
-  t.end()
-})
-
-test('tokenizer: lines', (t) => {
   t.deepEqual(
     tokenize('hello\nworld'),
     [
       [
-        [0, 4, T_WORD, 'hello']
+        {from: 0, to: 4, type: T_WORD, value: 'hello'}
       ],
       [
-        [0, 4, T_WORD, 'world']
+        {from: 0, to: 4, type: T_WORD, value: 'world'}
       ]
     ],
     'multiple lines'
@@ -79,12 +71,12 @@ test('tokenizer: lines', (t) => {
     [
       [],
       [
-        [0, 4, T_WORD, 'hello']
+        {from: 0, to: 4, type: T_WORD, value: 'hello'}
       ],
       [],
       [],
       [
-        [0, 4, T_WORD, 'world']
+        {from: 0, to: 4, type: T_WORD, value: 'world'}
       ],
       []
     ],
