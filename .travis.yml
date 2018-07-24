@@ -19,4 +19,4 @@ branches:
     - master
 matrix:
   fast_finish: true
-script: yarn start ci
+script: yarn start ciCoverage
