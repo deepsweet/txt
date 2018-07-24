@@ -6,7 +6,8 @@ import {
   T_SPACE,
   T_LEFT_PARENTHESIS,
   T_RIGHT_PARENTHESIS,
-  T_DOUBLE_QUOTE
+  T_DOUBLE_QUOTE,
+  T_SINGLE_QUOTE
 } from '../src/'
 
 test('tokenizer', (t) => {
@@ -198,6 +199,33 @@ test('tokenizer', (t) => {
       ]
     ],
     'double quotes'
+  )
+
+  t.deepEqual(
+    tokenize('\'foo\''),
+    [
+      [
+        {
+          type: T_SINGLE_QUOTE,
+          from: 0,
+          to: 0,
+          value: '\''
+        },
+        {
+          type: T_WORD,
+          from: 1,
+          to: 3,
+          value: 'foo'
+        },
+        {
+          type: T_SINGLE_QUOTE,
+          from: 4,
+          to: 4,
+          value: '\''
+        }
+      ]
+    ],
+    'single quotes'
   )
 
   t.end()
