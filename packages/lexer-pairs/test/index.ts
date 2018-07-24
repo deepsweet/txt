@@ -5,7 +5,8 @@ import {
   lexerPairs,
   T_PARENTHESES,
   T_DOUBLE_QUOTES,
-  T_SINGLE_QUOTES
+  T_SINGLE_QUOTES,
+  T_BACKTICKS
 } from '../src/'
 
 test('lexer-pairs', (t) => {
@@ -88,6 +89,20 @@ test('lexer-pairs', (t) => {
 
   t.deepEqual(
     lexerPairs(
+      tokenize('"f`o`o"')
+    ),
+    [
+      {
+        type: T_DOUBLE_QUOTES,
+        open: { x: 0, y: 0 },
+        close: { x: 6, y: 0 }
+      }
+    ],
+    'backticks inside of double quotes'
+  )
+
+  t.deepEqual(
+    lexerPairs(
       tokenize('"fo(o)"')
     ),
     [
@@ -130,6 +145,20 @@ test('lexer-pairs', (t) => {
 
   t.deepEqual(
     lexerPairs(
+      tokenize('\'f`o`o\'')
+    ),
+    [
+      {
+        type: T_SINGLE_QUOTES,
+        open: { x: 0, y: 0 },
+        close: { x: 6, y: 0 }
+      }
+    ],
+    'backticks inside of single quotes'
+  )
+
+  t.deepEqual(
+    lexerPairs(
       tokenize('\'fo(o)\'')
     ),
     [
@@ -140,6 +169,62 @@ test('lexer-pairs', (t) => {
       }
     ],
     'parentheses inside of single quotes'
+  )
+
+  t.deepEqual(
+    lexerPairs(
+      tokenize('`foo`')
+    ),
+    [
+      {
+        type: T_BACKTICKS,
+        open: { x: 0, y: 0 },
+        close: { x: 2, y: 0 }
+      }
+    ],
+    'backticks'
+  )
+
+  t.deepEqual(
+    lexerPairs(
+      tokenize('`f"o"o`')
+    ),
+    [
+      {
+        type: T_BACKTICKS,
+        open: { x: 0, y: 0 },
+        close: { x: 6, y: 0 }
+      }
+    ],
+    'double quotes inside of backticks'
+  )
+
+  t.deepEqual(
+    lexerPairs(
+      tokenize('`f\'o\'o`')
+    ),
+    [
+      {
+        type: T_BACKTICKS,
+        open: { x: 0, y: 0 },
+        close: { x: 6, y: 0 }
+      }
+    ],
+    'single quotes inside of backticks'
+  )
+
+  t.deepEqual(
+    lexerPairs(
+      tokenize('`fo(o)`')
+    ),
+    [
+      {
+        type: T_BACKTICKS,
+        open: { x: 0, y: 0 },
+        close: { x: 5, y: 0 }
+      }
+    ],
+    'parentheses inside of backticks'
   )
 
   t.end()
