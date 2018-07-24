@@ -4,6 +4,9 @@ export const T_SPACE = 'SPACE'
 // export const T_EXLAMATION_MARK = 'EXLAMATION_MARK'
 export const T_LEFT_PARENTHESIS = 'LEFT_PARENTHESIS'
 export const T_RIGHT_PARENTHESIS = 'RIGHT_PARENTHESIS'
+// export const T_SINGLE_QUOTE = 'SINGLE_QUOTE'
+export const T_DOUBLE_QUOTE = 'DOUBLE_QUOTE'
+// export const T_BACKTICK = 'BACKTICK'
 // export const T_LEFT_CURLY_BRACKET = 'LEFT_CURLY_BRACKET'
 // export const T_RIGHT_CURLY_BRACKET = 'RIGHT_CURLY_BRACKET'
 // export const T_LESS_THAN_SIGN = 'LESS_THAN_SIGN'
@@ -46,6 +49,16 @@ export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
     if (char === ' ') {
       tokens.push({
         type: T_SPACE,
+        from: ci,
+        to: ci,
+        value: char
+      })
+      continue
+    }
+
+    if (char === '"') {
+      tokens.push({
+        type: T_DOUBLE_QUOTE,
         from: ci,
         to: ci,
         value: char
