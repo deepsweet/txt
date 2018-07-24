@@ -1,12 +1,12 @@
 import {
-  Lines,
+  TLines,
   T_LEFT_PARENTHESIS,
   T_RIGHT_PARENTHESIS
 } from '@txt/tokenizer/src/'
 
 export const T_PARENTHESES = 'PARENTHESES'
 
-export type Pair = {
+export type TPair = {
   from: {
     x: number,
     y: number
@@ -17,9 +17,9 @@ export type Pair = {
   },
   type: string
 }
-export type Pairs = Pair[]
+export type TPairs = TPair[]
 
-export const lexerPairs = (lines: Lines): Pairs => {
+export const lexerPairs = (lines: TLines): TPairs => {
   const pairs = {
     [T_PARENTHESES]: []
   }

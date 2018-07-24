@@ -9,19 +9,19 @@ export const T_RIGHT_PARENTHESIS = 'RIGHT_PARENTHESIS'
 // export const T_LESS_THAN_SIGN = 'LESS_THAN_SIGN'
 // export const T_GREATER_THAN_SIGN = 'GREATER_THAN_SIGN'
 
-export type Options = { [key: string]: any }
-export type Token = {
+export type TOptions = { [key: string]: any }
+export type TToken = {
   from: number,
   to: number,
   type: string,
   value: any
 }
-export type Line = Token[]
-export type Lines = Line[]
+export type TLine = TToken[]
+export type TLines = TLine[]
 
-export const tokenizer = (options?: Options) => (txt: string): Lines => {
-  const lines: Lines = []
-  let tokens: Line = []
+export const tokenizer = (options?: TOptions) => (txt: string): TLines => {
+  const lines: TLines = []
+  let tokens: TLine = []
 
   for (let gi = 0, ci = 0; gi < txt.length; gi++, ci++) {
     const char = txt[gi]
