@@ -5,7 +5,7 @@
   ],
   "devDependencies": {
     "@deepsweet/eslint-config-node-ts": "^0.1.0",
-    "@deepsweet/start-preset-node-ts-monorepo": "^0.0.2",
+    "@deepsweet/start-preset-node-ts-monorepo": "^0.0.3",
     "@types/node": "^10.3.1",
     "@types/tape": "^4.2.32",
     "tape": "^4.9.1",
