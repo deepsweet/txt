@@ -19,7 +19,6 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@txt/tokenizer": "*",
     "bsc": "^0.1.0"
   }
 }

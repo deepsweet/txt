@@ -17,8 +17,5 @@
   },
   "engines": {
     "node": ">=8"
-  },
-  "dependencies": {
-    "@txt/tokenizer": "*"
   }
 }
