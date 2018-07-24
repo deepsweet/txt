@@ -3,7 +3,9 @@ import test from 'tape'
 import {
   tokenizer,
   T_WORD,
-  T_SPACE
+  T_SPACE,
+  T_LEFT_PARENTHESIS,
+  T_RIGHT_PARENTHESIS
 } from '../src/'
 
 test('tokenizer', (t) => {
@@ -141,6 +143,33 @@ test('tokenizer', (t) => {
       []
     ],
     'empty lines'
+  )
+
+  t.deepEqual(
+    tokenize('(foo)'),
+    [
+      [
+        {
+          type: T_LEFT_PARENTHESIS,
+          from: 0,
+          to: 0,
+          value: '('
+        },
+        {
+          type: T_WORD,
+          from: 1,
+          to: 3,
+          value: 'foo'
+        },
+        {
+          type: T_RIGHT_PARENTHESIS,
+          from: 4,
+          to: 4,
+          value: ')'
+        }
+      ]
+    ],
+    'parenthesis'
   )
 
   t.end()
