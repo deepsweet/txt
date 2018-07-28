@@ -14,11 +14,11 @@ export const T_PAIR_DOUBLE_QUOTES = 'DOUBLE_QUOTES'
 export const T_PAIR_BACKTICKS = 'BACKTICKS'
 
 export type TPair = {
-  from: {
+  open: {
     x: number,
     y: number
   },
-  to: {
+  close: {
     x: number,
     y: number
   },
