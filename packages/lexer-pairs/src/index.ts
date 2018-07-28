@@ -137,5 +137,17 @@ export const lexerPairs = (lines: TLines): TPairs => {
     }
   }
 
+  const sortedResult = result.sort((a, b) => {
+    if (a.open.y < b.open.y) {
+      return -1
+    }
+
+    if (a.open.y > b.open.y) {
+      return 1
+    }
+
+    return a.open.x - b.open.x
+  })
+
   return result
 }

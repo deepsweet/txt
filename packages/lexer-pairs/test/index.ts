@@ -47,16 +47,40 @@ test('lexer-pairs', (t) => {
     [
       {
         type: T_PAIR_PARENTHESES,
-        open: { x: 3, y: 0 },
-        close: { x: 5, y: 0 }
+        open: { x: 0, y: 0 },
+        close: { x: 8, y: 0 }
       },
       {
         type: T_PAIR_PARENTHESES,
-        open: { x: 0, y: 0 },
-        close: { x: 8, y: 0 }
+        open: { x: 3, y: 0 },
+        close: { x: 5, y: 0 }
       }
     ],
-    'nested parentheses'
+    'nested parentheses, sorted'
+  )
+
+  t.deepEqual(
+    lexerPairs(
+      tokenize('(foo)(\n(bar)\nbaz)')
+    ),
+    [
+      {
+        type: T_PAIR_PARENTHESES,
+        open: { x: 0, y: 0 },
+        close: { x: 2, y: 0 }
+      },
+      {
+        type: T_PAIR_PARENTHESES,
+        open: { x: 3, y: 0 },
+        close: { x: 1, y: 2 }
+      },
+      {
+        type: T_PAIR_PARENTHESES,
+        open: { x: 0, y: 1 },
+        close: { x: 2, y: 1 }
+      }
+    ],
+    'multiline nested parentheses, sorted'
   )
 
   t.deepEqual(
